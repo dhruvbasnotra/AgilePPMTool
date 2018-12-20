@@ -9,6 +9,7 @@ import com.dhruv.ppmtool.Project.*;
 @Repository
 public interface ProjectRepository extends CrudRepository<Project,Long> {
 
+Project findByProjectIdentifier(String projectId);
 
 
 }
