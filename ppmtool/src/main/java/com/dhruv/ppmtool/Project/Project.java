@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Project {
+public class Project
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,10 @@ public class Project {
     @Size(min=4,max=5,message = "please use 4 to 5 characters")
     @Column(updatable = false,unique = true)
     private String projectIdentifier;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+
+    private Backlog backlog;
 
     @NotBlank(message = "Project description cannot be blank")
     private String description;
@@ -55,8 +60,17 @@ public class Project {
         return projectIdentifier;
     }
 
+
     public void setProjectIdentifier(String projectIdentifier) {
         this.projectIdentifier = projectIdentifier;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     public String getDescription() {
